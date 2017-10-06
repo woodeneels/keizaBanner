@@ -39,6 +39,7 @@ namespace keizaBanner
             labs.Add(new KeyValuePair<string, string>("Monthly Top Donor", "alerts\\monthly_top_donator.txt"));
             labs.Add(new KeyValuePair<string, string>("Latest Sub", "alerts\\most_recent_subscriber.txt"));
             labs.Add(new KeyValuePair<string, string>("Latest Cheer", "alerts\\most_recent_cheerer.txt"));
+            labs.Add(new KeyValuePair<string, string>("Latest Donor", "alerts\\most_recent_donator.txt"));
 
             fadeIn.Enabled = true;
             fadeIn.Interval = 10;
