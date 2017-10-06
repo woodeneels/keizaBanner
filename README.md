@@ -3,6 +3,7 @@ stream banner for memebig.net
 
 this one *should* be easier to work with
 
+also bear in mind there is *absolutely zero pressure* to use this janky garbage if you don't want to, the challenge gave me something to do and you don't owe me shit.
 # instructions
 it expects to be in a folder with a file called "messages.txt" with all your messages separated by newlines.
 it also expects there to be a "streamlabs" folder with all your streamlabs txt files in in the same directory.
