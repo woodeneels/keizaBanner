@@ -113,8 +113,10 @@ namespace keizaBanner
                 {
                     if (File.Exists(path + entry.Value))
                     {
-                        StreamReader rdr = new StreamReader(path + entry.Value);
-                        messages.Add(entry.Key + ": " + rdr.ReadLine());
+                        using (StreamReader rdr = new StreamReader(path + entry.Value))
+                        {
+                            messages.Add(entry.Key + ": " + rdr.ReadLine());
+                        }                            
                     }
                 }
                 if (File.Exists(path + fileMessages))
