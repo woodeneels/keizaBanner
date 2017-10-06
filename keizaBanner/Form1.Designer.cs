@@ -37,9 +37,9 @@
             this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMessage.Location = new System.Drawing.Point(13, 13);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(175, 31);
+            this.lblMessage.Size = new System.Drawing.Size(210, 31);
             this.lblMessage.TabIndex = 0;
-            this.lblMessage.Text = "no messages";
+            this.lblMessage.Text = "~good morning~";
             // 
             // Form1
             // 

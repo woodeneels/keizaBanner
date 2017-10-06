@@ -93,7 +93,9 @@ namespace keizaBanner
                 fadeOut.Stop();
                 fadeOut.Enabled = false;
 
-                lblMessage.Text = messages[msg];
+                try { lblMessage.Text = messages[msg]; }
+                catch { lblMessage.Text = "~wigglywoo~wigglywoo~wigglywoo~"; }
+                
                 msg++;
                 if (msg >= messages.Count)
                     msg = 0;
