@@ -1,5 +1,5 @@
 # keizaBanner
-stream banner for memebig.net
+stream banner for ~~memebirthday.net~~ memebig.net
 
 this one *should* be easier to work with
 
