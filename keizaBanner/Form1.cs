@@ -24,8 +24,9 @@ namespace keizaBanner
         string path = AppDomain.CurrentDomain.BaseDirectory;
 
         // define location of files to be read
-        StringDictionary labs = new StringDictionary();
+        //StringDictionary labs = new StringDictionary();
         string fileMessages = "messages.txt";
+        List<KeyValuePair<string, string>> labs = new List<KeyValuePair<string, string>>();
 
         // create an array of messages
         List<string> messages = new List<string>();
@@ -37,10 +38,10 @@ namespace keizaBanner
             fadeOut.Tick += new EventHandler(fadeOut_Tick);
             wait.Tick += new EventHandler(wait_Tick);
 
-            labs.Add("Daily Top Donor", "streamlabs\\session_top_donator.txt");
-            labs.Add("Monthly Top Donor", "streamlabs\\monthly_top_donator.txt");
-            labs.Add("Latest Sub", "streamlabs\\most_recent_subscriber.txt");
-            labs.Add("Latest Cheer", "streamlabs\\most_recent_cheerer.txt");
+            labs.Add(new KeyValuePair<string, string>("Daily Top Donor", "streamlabs\\session_top_donator.txt"));
+            labs.Add(new KeyValuePair<string, string>("Monthly Top Donor", "streamlabs\\monthly_top_donator.txt"));
+            labs.Add(new KeyValuePair<string, string>("Latest Sub", "streamlabs\\most_recent_subscriber.txt"));
+            labs.Add(new KeyValuePair<string, string>("Latest Cheer", "streamlabs\\most_recent_cheerer.txt"));
 
             fadeIn.Enabled = true;
             fadeIn.Interval = 10;
@@ -108,7 +109,7 @@ namespace keizaBanner
             if (delay == 0)
             {
                 messages.Clear();
-                foreach (DictionaryEntry entry in labs)
+                foreach (var entry in labs)
                 {
                     if (File.Exists(path + entry.Value))
                     {
@@ -135,7 +136,7 @@ namespace keizaBanner
                 fadeOut.Enabled = true;
                 fadeOut.Interval = 10;
                 fadeOut.Start();
-            }            
+            }
         }
     }
 }
