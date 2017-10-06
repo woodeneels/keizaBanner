@@ -23,7 +23,7 @@ namespace keizaBanner
         // define location of files to be read
         StringDictionary labs = new StringDictionary();
         string fileMessages = "messages.txt";
-
+        
         public Form1()
         {
             InitializeComponent();
@@ -34,9 +34,7 @@ namespace keizaBanner
             labs.Add("Daily Top Donor", "streamlabs\\session_top_donator.txt");
             labs.Add("Monthly Top Donor", "streamlabs\\monthly_top_donator.txt");
             labs.Add("Latest Sub", "streamlabs\\most_recent_subscriber.txt");
-            labs.Add("Latest Cheer", "streamlabs\\most_recent_cheerer.txt");
-
-            loop();
+            labs.Add("Latest Cheer", "streamlabs\\most_recent_cheerer.txt"); 
         }
 
         void loop()
