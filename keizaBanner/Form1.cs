@@ -127,7 +127,7 @@ namespace keizaBanner
             }
             delay++;
 
-            if (delay == 2)
+            if (delay == 10)
             {
                 delay = 0;
                 wait.Stop();
