@@ -5,6 +5,8 @@ this one *should* be easier to work with
 
 also bear in mind there is *absolutely zero pressure* to use this janky garbage if you don't want to, the challenge gave me something to do and you don't owe me shit.
 # instructions
+if you get any errors trying to run the app, you might need to install the <a href="https://www.microsoft.com/net/download/framework">latest version of the .NET Framework</a> (the framework only, not visual studio).
+
 it expects to be in a folder with a file called "messages.txt" with all your messages separated by newlines.
 it also expects there to be a "streamlabs" folder with all your streamlabs txt files in in the same directory.
 in short, your folder hierarchy should look something like this:
