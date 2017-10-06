@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
@@ -18,12 +19,17 @@ namespace keizaBanner
         int g = 0;
         int b = 0;
         int fade = 0;
-        string path = Assembly.GetExecutingAssembly().Location;
+        int delay = 0;
+        int msg = 0;
+        string path = AppDomain.CurrentDomain.BaseDirectory;
 
         // define location of files to be read
         StringDictionary labs = new StringDictionary();
         string fileMessages = "messages.txt";
-        
+
+        // create an array of messages
+        List<string> messages = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -34,36 +40,8 @@ namespace keizaBanner
             labs.Add("Daily Top Donor", "streamlabs\\session_top_donator.txt");
             labs.Add("Monthly Top Donor", "streamlabs\\monthly_top_donator.txt");
             labs.Add("Latest Sub", "streamlabs\\most_recent_subscriber.txt");
-            labs.Add("Latest Cheer", "streamlabs\\most_recent_cheerer.txt"); 
-        }
+            labs.Add("Latest Cheer", "streamlabs\\most_recent_cheerer.txt");
 
-        void loop()
-        {
-            while (true)
-            {
-                foreach (DictionaryEntry entry in labs)
-                {
-                    if (File.Exists(path + entry.Value))
-                    {
-                        StreamReader rdr = new StreamReader(path + entry.Value);
-                        lblMessage.Text = entry.Key + ": " + rdr.ReadLine();
-                        StartFade();
-                    }
-                }
-                if (File.Exists(path + fileMessages))
-                {
-                    string[] lines = File.ReadAllLines(path + fileMessages);
-                    foreach (string line in lines)
-                    {
-                        lblMessage.Text = line;
-                        StartFade();
-                    }
-                }
-            }
-        }
-
-        private void StartFade()
-        {
             fadeIn.Enabled = true;
             fadeIn.Interval = 10;
             fadeIn.Start();
@@ -88,7 +66,7 @@ namespace keizaBanner
                     fadeIn.Stop();
                     fadeIn.Enabled = false;
                     wait.Enabled = true;
-                    wait.Interval = 10000;
+                    wait.Interval = 1000;
                     wait.Start();
                 }
             }
@@ -113,15 +91,51 @@ namespace keizaBanner
                 b = 0;
                 fadeOut.Stop();
                 fadeOut.Enabled = false;
+
+                lblMessage.Text = messages[msg];
+                msg++;
+                if (msg >= messages.Count)
+                    msg = 0;
+
+                fadeIn.Enabled = true;
+                fadeIn.Interval = 10;
+                fadeIn.Start();
             }
         }
 
         private void wait_Tick(object sender, EventArgs e)
         {
-            // maybe we want to shift some stuff here to take advantage of the 10s delay?
-            fadeOut.Enabled = true;
-            fadeOut.Interval = 10;
-            fadeOut.Start();
+            if (delay == 0)
+            {
+                messages.Clear();
+                foreach (DictionaryEntry entry in labs)
+                {
+                    if (File.Exists(path + entry.Value))
+                    {
+                        StreamReader rdr = new StreamReader(path + entry.Value);
+                        messages.Add(entry.Key + ": " + rdr.ReadLine());
+                    }
+                }
+                if (File.Exists(path + fileMessages))
+                {
+                    string[] lines = File.ReadAllLines(path + fileMessages);
+                    foreach (string line in lines)
+                    {
+                        messages.Add(line);
+                    }
+                }
+            }
+            delay++;
+
+            if (delay == 2)
+            {
+                delay = 0;
+                wait.Stop();
+                wait.Enabled = false;
+                fadeOut.Enabled = true;
+                fadeOut.Interval = 10;
+                fadeOut.Start();
+            }            
         }
     }
 }
