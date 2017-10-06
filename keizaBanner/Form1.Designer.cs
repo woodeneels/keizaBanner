@@ -33,26 +33,26 @@
             // 
             // lblMessage
             // 
-            this.lblMessage.AutoSize = true;
+            this.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(12, 9);
+            this.lblMessage.Location = new System.Drawing.Point(0, 0);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(210, 31);
+            this.lblMessage.Size = new System.Drawing.Size(954, 37);
             this.lblMessage.TabIndex = 0;
             this.lblMessage.Text = "~good morning~";
+            this.lblMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(854, 49);
+            this.ClientSize = new System.Drawing.Size(954, 37);
             this.Controls.Add(this.lblMessage);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Form1";
-            this.Text = "keizaBanner 0.1A  -  eriPoison";
+            this.Text = "keizaBanner 0.2A  -  eriPoison";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
