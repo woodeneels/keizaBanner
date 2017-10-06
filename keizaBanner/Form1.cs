@@ -35,10 +35,10 @@ namespace keizaBanner
             fadeOut.Tick += new EventHandler(fadeOut_Tick);
             wait.Tick += new EventHandler(wait_Tick);
 
-            labs.Add(new KeyValuePair<string, string>("Daily Top Donor", "streamlabs\\session_top_donator.txt"));
-            labs.Add(new KeyValuePair<string, string>("Monthly Top Donor", "streamlabs\\monthly_top_donator.txt"));
-            labs.Add(new KeyValuePair<string, string>("Latest Sub", "streamlabs\\most_recent_subscriber.txt"));
-            labs.Add(new KeyValuePair<string, string>("Latest Cheer", "streamlabs\\most_recent_cheerer.txt"));
+            labs.Add(new KeyValuePair<string, string>("Daily Top Donor", "alerts\\session_top_donator.txt"));
+            labs.Add(new KeyValuePair<string, string>("Monthly Top Donor", "alerts\\monthly_top_donator.txt"));
+            labs.Add(new KeyValuePair<string, string>("Latest Sub", "alerts\\most_recent_subscriber.txt"));
+            labs.Add(new KeyValuePair<string, string>("Latest Cheer", "alerts\\most_recent_cheerer.txt"));
 
             fadeIn.Enabled = true;
             fadeIn.Interval = 10;
