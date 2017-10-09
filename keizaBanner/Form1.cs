@@ -115,7 +115,8 @@ namespace keizaBanner
                     {
                         using (StreamReader rdr = new StreamReader(path + entry.Value))
                         {
-                            messages.Add(entry.Key + ": " + rdr.ReadLine());
+                            string msg = rdr.ReadLine();
+                            messages.Add(entry.Key + ": " + (msg == null ? "None" : msg));
                         }                            
                     }
                 }
