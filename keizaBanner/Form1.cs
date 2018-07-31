@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace keizaBanner
@@ -18,7 +19,12 @@ namespace keizaBanner
         int fade = 0;
         int delay = 0;
         int msg = 0;
+        int max = 0;
+        int scrollDiff = 0;
+        int scrollPos = 0;
         string path = AppDomain.CurrentDomain.BaseDirectory;
+        string fullMsg = "";
+        bool scrollDone = true;
 
         // define location of files to be read
         //StringDictionary labs = new StringDictionary();
@@ -46,6 +52,19 @@ namespace keizaBanner
             fadeIn.Start();
         }
 
+        private int maxChars(string s)
+        {
+            int i = s.Length;
+
+            while (TextRenderer.MeasureText(s, lblMessage.Font).Width > lblMessage.Width)
+            {
+                i--;
+                s = s.Substring(0, s.Length - 1);
+            }
+
+            return i;
+        }
+
         private void fadeIn_Tick(object sender, EventArgs e)
         {
             fade++;
@@ -65,7 +84,7 @@ namespace keizaBanner
                     fadeIn.Stop();
                     fadeIn.Enabled = false;
                     wait.Enabled = true;
-                    wait.Interval = 1000;
+                    wait.Interval = 500;
                     wait.Start();
                 }
             }
@@ -91,9 +110,21 @@ namespace keizaBanner
                 fadeOut.Stop();
                 fadeOut.Enabled = false;
 
-                try { lblMessage.Text = messages[msg]; }
+                try
+                {
+                    string msgTxt = messages[msg];
+                    if (TextRenderer.MeasureText(msgTxt, lblMessage.Font).Width > lblMessage.Width)
+                    {
+                        max = maxChars(msgTxt);
+                        lblMessage.Text = msgTxt.Substring(0, max);
+                        fullMsg = msgTxt;
+                        scrollDiff = msgTxt.Length - max;
+                        scrollDone = false;
+                    }
+                    else { lblMessage.Text = msgTxt; }
+                }
                 catch { lblMessage.Text = "~wigglywoo~wigglywoo~wigglywoo~"; }
-                
+
                 msg++;
                 if (msg >= messages.Count)
                     msg = 0;
@@ -117,7 +148,7 @@ namespace keizaBanner
                         {
                             string msg = rdr.ReadLine();
                             messages.Add(entry.Key + ": " + (msg == null ? "None" : msg));
-                        }                            
+                        }
                     }
                 }
                 if (File.Exists(path + fileMessages))
@@ -131,7 +162,7 @@ namespace keizaBanner
             }
             delay++;
 
-            if (delay == 10)
+            if (delay >= 20 && scrollDone)
             {
                 delay = 0;
                 wait.Stop();
@@ -139,6 +170,19 @@ namespace keizaBanner
                 fadeOut.Enabled = true;
                 fadeOut.Interval = 10;
                 fadeOut.Start();
+            }
+
+            if (!scrollDone && delay >= 8) // four seconds for the front of the message
+            {
+                scrollPos++;
+                string m = fullMsg.Substring(scrollPos, max - 2); // this bit of "math"
+                lblMessage.Text = m;
+
+                if (scrollPos > scrollDiff + 1) // and this one give us a bit of wiggle room on character size
+                {
+                    scrollDone = true;
+                    delay = 12; // give us four seconds to appreciate the end of our message
+                }
             }
         }
     }
