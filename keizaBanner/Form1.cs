@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace keizaBanner
@@ -175,10 +174,15 @@ namespace keizaBanner
             if (!scrollDone && delay >= 8) // four seconds for the front of the message
             {
                 scrollPos++;
-                string m = fullMsg.Substring(scrollPos, max - 2); // this bit of "math"
-                lblMessage.Text = m;
+                string m = fullMsg.Substring(scrollPos, max);
+                if (TextRenderer.MeasureText(m, lblMessage.Font).Width > lblMessage.Width)
+                {
+                    max = maxChars(m);
+                    m = fullMsg.Substring(scrollPos, max);
+                }
+                    lblMessage.Text = m;
 
-                if (scrollPos > scrollDiff + 1) // and this one give us a bit of wiggle room on character size
+                if ((scrollPos + m.Length) >= fullMsg.Length)
                 {
                     scrollDone = true;
                     delay = 12; // give us four seconds to appreciate the end of our message

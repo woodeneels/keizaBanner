@@ -86,7 +86,7 @@
             this.Controls.Add(this.lblMessage);
             this.ForeColor = System.Drawing.Color.White;
             this.Name = "Form1";
-            this.Text = "keizaBanner 0.2A  -  eriPoison";
+            this.Text = "keizaBanner 0.3A  -  eriPoison";
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
